@@ -70,9 +70,24 @@ int main()
 	int sumFirstChoice = 0;
 	int sumSwitchChoice = 0;
 	for (int i = 0; i < TIMESTOSIMULATE; i++) {
-		
-		simulate();
+		//run simulation
+		bool pickedDoorValue = false;
+		bool switchedDoorValue = false;
+		simulate(&pickedDoorValue, &switchedDoorValue);
+		//sum the results
+		if (pickedDoorValue == true)
+		{
+			sumFirstChoice += 1;
+		}
+		if(switchedDoorValue == true)
+		{
+			sumSwitchChoice += 1;
+		}
+			
 	}
+	//get percentages
+	float percentSwitchWon = (float)sumSwitchChoice / (float)TIMESTOSIMULATE;
+	float percentChoiceWon = (float)sumFirstChoice / (float)TIMESTOSIMULATE;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
