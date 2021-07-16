@@ -10,6 +10,25 @@ using namespace::std;
 int chooseDoor();
 
 /**
+*	Method gotten from 3rd method here: https://www.geeksforgeeks.org/rounding-floating-point-number-two-decimal-places-c-c/
+*/
+float roundFloat(float var)
+{
+	// we use array of chars to store number
+	// as a string.
+	char str[40];
+
+	// Print in string the value of var 
+	// with two decimal point
+	sprintf_s(str, "%.5f", var);
+
+	// scan string value in var 
+	sscanf_s(str, "%f", &var);
+
+	return var;
+}
+
+/**
 *	Creates a new door array on the heap, and passes the pointer to it back;
 */
 bool* getRandomDoorArray()
@@ -17,7 +36,6 @@ bool* getRandomDoorArray()
 	bool *doors = new bool[3];
 	doors[0] = false; doors[1] = false; doors[2] = false;
 	int randDoor = chooseDoor();
-	cout << randDoor;
 	doors[randDoor] = true;
 	return doors;
 }
@@ -88,6 +106,14 @@ int main()
 	//get percentages
 	float percentSwitchWon = (float)sumSwitchChoice / (float)TIMESTOSIMULATE;
 	float percentChoiceWon = (float)sumFirstChoice / (float)TIMESTOSIMULATE;
+	//round the floats
+	percentSwitchWon = roundFloat(percentSwitchWon)*100;
+	percentChoiceWon = roundFloat(percentChoiceWon)*100;
+	//sumarise results
+	printf("Keeping your first choice, you win %.3f%% of the time\n", percentChoiceWon);
+	printf("Switching your choice, you win %.3f%% of the time\n", percentSwitchWon);
+
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
