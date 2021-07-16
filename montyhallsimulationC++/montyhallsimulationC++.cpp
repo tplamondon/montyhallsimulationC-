@@ -9,6 +9,9 @@ using namespace::std;
 
 int chooseDoor();
 
+/**
+*	Creates a new door array on the heap, and passes the pointer to it back;
+*/
 bool* getRandomDoorArray()
 {
 	bool *doors = new bool[3];
@@ -19,10 +22,17 @@ bool* getRandomDoorArray()
 	return doors;
 }
 
+/**
+*	Chooses a random door (int between 1 and 3)
+*/
 int chooseDoor() {
 	return rand() % 3;
 }
 
+/**
+*	returns which door to "open", i.e, the one with the goat
+*	also provides the door option that can be switched to
+*/
 int openGoatDoor(int choiceDoor, bool* doors, int* switchDoor) {
 	int goat = -1;
 	for (int i = 0; i < 3; i++) {
@@ -34,15 +44,24 @@ int openGoatDoor(int choiceDoor, bool* doors, int* switchDoor) {
 	return goat;
 }
 
-void simulate() {
+/**
+*	Run the simulation once and free memory
+*	sets values of pointers for the main function
+*/
+void simulate(bool* pickedDoorVal, bool* switchedDoorVal) {
 	//get random door to have car
 	bool* doors = getRandomDoorArray();
 	//choose door
-
+	int pickedDoor = chooseDoor();
 	//open goat door
-	
+	int* switchDoor = new int;
+	int goatDoor = openGoatDoor(pickedDoor, doors, switchDoor);
 	//return picked doors
+	*pickedDoorVal = doors[pickedDoor];
+	*switchedDoorVal = doors[*switchDoor];
+	//free memory
 	delete [] doors;
+	delete switchDoor;
 }
 
 int main()
@@ -51,6 +70,7 @@ int main()
 	int sumFirstChoice = 0;
 	int sumSwitchChoice = 0;
 	for (int i = 0; i < TIMESTOSIMULATE; i++) {
+		
 		simulate();
 	}
 }
