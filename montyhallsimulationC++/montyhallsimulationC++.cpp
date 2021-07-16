@@ -7,16 +7,32 @@
 
 using namespace::std;
 
+int chooseDoor();
+
 bool* getRandomDoorArray()
 {
 	bool *doors = new bool[3];
 	doors[0] = false; doors[1] = false; doors[2] = false;
-	int randDoor = rand() % 3;
+	int randDoor = chooseDoor();
 	cout << randDoor;
 	doors[randDoor] = true;
 	return doors;
 }
 
+int chooseDoor() {
+	return rand() % 3;
+}
+
+int openGoatDoor(int choiceDoor, bool* doors, int* switchDoor) {
+	int goat = -1;
+	for (int i = 0; i < 3; i++) {
+		if (doors[i] == false && i != choiceDoor) {
+			goat = i;
+		}
+	}
+	*switchDoor = (0 + 1 + 2) - (goat + choiceDoor);
+	return goat;
+}
 
 void simulate() {
 	//get random door to have car
