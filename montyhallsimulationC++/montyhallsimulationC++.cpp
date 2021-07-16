@@ -3,10 +3,40 @@
 
 #include "pch.h"
 #include <iostream>
+#include <stdlib.h>
+
+using namespace::std;
+
+bool* getRandomDoorArray()
+{
+	bool *doors = new bool[3];
+	doors[0] = false; doors[1] = false; doors[2] = false;
+	int randDoor = rand() % 3;
+	cout << randDoor;
+	doors[randDoor] = true;
+	return doors;
+}
+
+
+void simulate() {
+	//get random door to have car
+	bool* doors = getRandomDoorArray();
+	//choose door
+
+	//open goat door
+	
+	//return picked doors
+	delete [] doors;
+}
 
 int main()
 {
-    std::cout << "Hello World!\n"; 
+	const int TIMESTOSIMULATE = 100000;
+	int sumFirstChoice = 0;
+	int sumSwitchChoice = 0;
+	for (int i = 0; i < TIMESTOSIMULATE; i++) {
+		simulate();
+	}
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
